@@ -12,3 +12,5 @@ Editar una tarea
 El boton para eliminar tareas o si no el check list para completarlas
 https://github.com/user-attachments/assets/c27d4a5e-5967-40b7-a03c-9c281d5a1776
 
+Url para ver el back
+https://github.com/Vdna99/ExamenParcial6_Victor_N_Back
