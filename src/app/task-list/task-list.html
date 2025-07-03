@@ -1,0 +1,87 @@
+<div class="container py-5">
+    <h1 class="text-center mb-4">📝 Mis Tareas</h1>
+
+    <!-- Botón para agregar tarea -->
+    <div class="text-end mb-3">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal">+ Nueva Tarea</button>
+    </div>
+
+
+    <ul class="list-group" id="taskList"></ul>
+</div>
+
+<!-- Div para mostra las tareas -->
+<div *ngFor="let task of card; let i = index" class="card mb-3 mx-auto w-75">
+    <div class="card-body">
+
+        <!-- check list para actulizar las tareas-->
+       <input type="checkbox"
+           class="form-check-input position-absolute top-0 end-0 m-3"
+           [checked]="task.state === 'Completado'"
+           (change)="EditState(task.id,task)">
+
+
+        <h5 class="card-title">Title: {{ task.title}}</h5>
+        <p class="card-text">Description: {{ task.description}}</p>
+        <p class="card-text"><small class="text-muted">Fecha límite: {{ task.dateLimit}}</small></p>
+        <p class="card-text"><small class="text-muted">Id: {{ task.id}}</small></p>
+        <p class="card-text"><span class="badge bg-info">Estado: {{ task.state}}</span></p>
+
+        <div class="d-flex gap-2">
+            <button class="btn btn-danger btn-sm" (click)="DeleteTask(task.id)" >Eliminar</button>
+            <button class="btn btn-warning btn-sm"
+        (click)="EditTask(task.id,task)"data-bs-toggle="modal"data-bs-target="#taskModal">Editar</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para guardar o actulizar las tareas -->
+<div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      
+      <form (ngSubmit)="SaveTask()">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="taskModalLabel">Nueva Tarea</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Título</label>
+            <input type="text" class="form-control"
+                   [(ngModel)]="NewTask.title"
+                   name="title"
+                   required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-control"
+                      [(ngModel)]="NewTask.description"
+                      name="description"
+                      rows="3"
+                      required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-control"
+                   [(ngModel)]="NewTask.dateLimit"
+                   name="dateLimit"
+                   required>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar Tarea</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
